@@ -157,6 +157,13 @@
     [tarFile packFilesAndDirectoriesAtPath:sourcePath completion:completion];
 }
 
+- (void)tarFileAtPaths:(NSArray <NSString *> *)sourcePaths
+               toPath:(NSString *)destinationPath
+               completion:(void(^)(NSError *))completion {
+   NVHTarFile *tarFile = [[NVHTarFile alloc] initWithPath:destinationPath];
+   [tarFile packFilesAndDirectoriesAtPaths:sourcePaths completion:completion];
+}
+
 - (void)gzipFileAtPath:(NSString *)sourcePath
                 toPath:(NSString *)destinationPath
             completion:(void(^)(NSError *))completion {

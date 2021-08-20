@@ -17,4 +17,6 @@
 - (BOOL)packFilesAndDirectoriesAtPath:(NSString *)sourcePath error:(NSError **)error;
 - (void)packFilesAndDirectoriesAtPath:(NSString *)sourcePath completion:(void (^)(NSError *))completion;
 
+- (void)packFilesAndDirectoriesAtPaths:(NSArray <NSString *> *)sourcePaths completion:(void (^)(NSError *))completion;
+
 @end
