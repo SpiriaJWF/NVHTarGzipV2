@@ -388,8 +388,13 @@
 - (BOOL)packFilesAndDirectoriesAtPaths:(NSArray <NSString *> *)paths withTarObject:(id)object error:(NSError **)error
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
+    [self updateProgressVirtualTotalUnitCount:[paths count]];
+    int currentVirtualTotalUnit = 0;
 
     for (NSString *file in paths) {
+        [self updateProgressVirtualCompletedUnitCount:currentVirtualTotalUnit];
+        currentVirtualTotalUnit++;
+
         BOOL isParentDir = NO;
         [fileManager fileExistsAtPath:file isDirectory:&isParentDir];
 
@@ -411,6 +416,8 @@
             }
         }
     }
+
+    [self updateProgressVirtualCompletedUnitCountWithTotal];
 
     // Append two empty blocks to indicate end
     char block[TAR_BLOCK_SIZE*2];
